@@ -26,7 +26,7 @@ class Home extends Component{
     render(){
         const {classes} = this.props;
         let msg;
-        if(this.props.user){       
+        if(localStorage.getItem('token')){       
             msg = (
                 <Fragment>
                     <img className="response" src="./approved.jpg" alt="Approvato" />

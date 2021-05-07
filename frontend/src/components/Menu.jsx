@@ -12,7 +12,7 @@ export default class Menu extends Component{
 
     render(){
         let buttons;
-        if(this.props.user){
+        if(localStorage.getItem('token')){
             buttons = (
                 <Fragment>
                 <Link to={'/'} onClick={this.handleLogout}>

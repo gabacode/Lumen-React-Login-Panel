@@ -59,7 +59,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Accesso Negato.'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return [$this->respondWithToken($token), Auth::user()];
     }
 
     public function profile()
