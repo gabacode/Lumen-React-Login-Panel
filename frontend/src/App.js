@@ -4,31 +4,33 @@ import axios from 'axios';
 import Home from './Home';
 import Menu from './components/Menu';
 import Login from './components/Login';
+import Logout from './components/Logout';
 import Register from './components/Register';
 
 
 export default class App extends Component {
   state = {}
   componentDidMount = () => {
-    axios.get('user')
+    axios.get('profile')
     .then(res => {
       this.setState({
-        user: res.data
+        user: res.data.user.name
       });
     },
     err => {
-      console.log(err)
+      //pass
     }
-    )
+)
   }
   render(){
     return (
       <BrowserRouter>
       <div className="App">
-        <Menu/>
+        <Menu user={this.state.user}/>
         <Switch>
           <Route exact path="/" component={() => <Home user={this.state.user}/>}/>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
           <Route exact path="/registrazione" component={Register} />
         </Switch>
       </div>

@@ -16,7 +16,14 @@ code {
 .menulinks{
   justify-content: space-between;
 }
-a:-webkit-any-link {
+a{
   text-decoration: none;
   color: inherit;
+}
+.mainForm{
+  transition: transform 100ms;
+}
+img.response{
+  border-radius: 50%;
+  max-width: 256px;
 }

@@ -61,4 +61,17 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
+    public function profile()
+    {
+        return Auth::user();
+    }
+
+    public function logout(Request $request)
+    {
+        $credentials = $request->only('token');
+        if (Auth::logout($request)) {
+            return response()->json(['message' => 'Logout Effettuato.'], 200);
+        }
+    }
 }

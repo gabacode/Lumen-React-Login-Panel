@@ -48,13 +48,20 @@ class Login extends Component {
         axios.post('login', data)
         .then(res => {
             localStorage.setItem('token', res.data.token)
-            console.log(res);
             this.setState({
                 loggedIn: true
               });
         })
         .catch(err => {
-            console.log(err);
+            if(err.response.status === 422){
+                var e = document.getElementById('mainForm');
+                e.style.transform="translate(6px)";
+                setTimeout(function(){e.style.transform="translate(0px)";},100);
+                setTimeout(function(){e.style.transform="translate(6px)";},200);
+                setTimeout(function(){e.style.transform="translate(0px)";},300);
+            }else{
+                alert(JSON.stringify(err.response.status+" "+err.response.data.message));
+            }
             this.setState({
                 status: "error"
               });
@@ -65,17 +72,11 @@ class Login extends Component {
         if(this.state.loggedIn){
             return <Redirect to={'/'}/>;
         }
-        if(this.state.status == "error"){
-            alert("pobblemi");
-            this.setState({
-                status: "ok"
-            })
-        }
         const {classes} = this.props;
         return (
             <>
             <Helmet pageTitle="Log In"/>
-            <Container component="main" maxWidth="xs">
+            <Container id="mainForm" className="mainForm animate__animated animate__fadeIn" component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />

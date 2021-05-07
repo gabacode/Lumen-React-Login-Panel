@@ -34,11 +34,11 @@ const styles = theme => ({
 class Register extends Component {
 
     state = {
-        isRegistered: false,
-        status: "ok",
+        isRegistered: '',
+        status: '',
       };
 
-    handleSubmit = e => {
+      handleSubmit = e => {
         e.preventDefault();
         const data ={
             name: this.nome,
@@ -49,25 +49,33 @@ class Register extends Component {
 
         axios.post('register', data)
         .then(res => {
-            console.log(res)
+            alert(JSON.stringify(res.data.message, null, 2)+"\nAdesso puoi effettuare il Log In.");
             this.setState({
               isRegistered: true
             });
         })
         .catch(err => {
-            console.log(err);
+          if(err.response.status === 422){
+            var e = document.getElementById('mainForm');
+            e.style.transform="translate(6px)";
+            setTimeout(function(){e.style.transform="translate(0px)";},100);
+            setTimeout(function(){e.style.transform="translate(6px)";},200);
+            setTimeout(function(){e.style.transform="translate(0px)";},300);
+        }else{
+            alert(JSON.stringify(err.response.status+" "+err.response.data.message));
+          }
         })
     }
 
     render(){
         const {classes} = this.props;
         if(this.state.isRegistered){
-          return <Redirect to={'/'}/>;
+          return <Redirect to={'/login'}/>;
         }
         return (
             <>
             <Helmet pageTitle="Registrazione"/>
-            <Container component="main" maxWidth="xs">
+            <Container id="mainForm" className="mainForm animate__animated animate__fadeIn" component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                   <PersonAddIcon />
