@@ -28,10 +28,10 @@ class Home extends Component{
     render(){
         const {classes} = this.props;
         let msg;
-        if(this.state.user){
+        if(this.state.loggedIn){       
             msg = (
                 <Fragment>
-                    <img className="response" src="./approved.jpg" />
+                    <img className="response" src="./approved.jpg" alt="Approvato" />
                     <h1>Ciao {this.state.user} 🎉</h1>
                     <Grid item>
                         <Link to={"logout"}>
@@ -45,7 +45,7 @@ class Home extends Component{
         }else{
             msg = (
                 <Fragment>
-                    <img className="response" src="./welcome.svg" />
+                    <img className="response" src="./welcome.svg" alt="Welcome" />
                     <h1>Benvenut* 👋</h1>
                     <Grid item>
                         <Link to={"login"}>

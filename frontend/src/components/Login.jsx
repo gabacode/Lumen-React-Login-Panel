@@ -30,11 +30,10 @@ const styles = theme => ({
       margin: theme.spacing(3, 0, 2),
     },
   });
-
 class Login extends Component {
 
     state = {
-        isLoggedin: "",
+        loggedIn: "",
         status: "",
       };
 
@@ -70,7 +69,12 @@ class Login extends Component {
 
     render(){
         if(this.state.loggedIn){
-            return <Redirect to={'/'}/>;
+            return <Redirect
+            to={{
+            pathname: "/",
+            state: { loggedIn: this.state.loggedIn }
+          }}
+        />
         }
         const {classes} = this.props;
         return (

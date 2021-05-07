@@ -21,6 +21,12 @@ export default class App extends Component {
       //pass
     }
 )
+  if (localStorage.getItem("token")) {
+    this.setState({
+      loggedIn : true
+    })
+  }
+
   }
   render(){
     return (
@@ -28,8 +34,8 @@ export default class App extends Component {
       <div className="App">
         <Menu user={this.state.user}/>
         <Switch>
-          <Route exact path="/" component={() => <Home user={this.state.user}/>}/>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={() => <Home loggedIn={this.state.loggedIn} user={this.state.user}/>}/>
+          <Route path="/login" render={(props) => <Login {...props}/>}/>
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/registrazione" component={Register} />
         </Switch>

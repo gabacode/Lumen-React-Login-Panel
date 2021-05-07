@@ -1,31 +1,32 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import axios from 'axios';
-
 
 export default class Logout extends Component {
   
-  state = {}
-  componentDidMount = () => {
-    axios.get('logout')
-    .then(res => {
-      this.setState({
-        loggedIn: false
-      });
-    },
-    err => {
-      console.log(err)
-    }
-)
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: '',
+    };
+  }
+
+  componentDidMount() {
+    localStorage.clear();
+    this.setState({
+      loggedIn: false
+    });
   }
 
   render(){
-    localStorage.clear();
-    
     return(
       <>
         <h1>Arrivederci</h1>
-        <Redirect to={'login'}/>
+        <Redirect
+            to={{
+            pathname: "login",
+            state: { loggedIn: this.state.loggedIn }
+          }}
+        />
       </>
     )
   }
