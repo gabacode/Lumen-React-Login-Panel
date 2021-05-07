@@ -1,32 +1,21 @@
 import React, { Component, Fragment } from "react";
-import axios from 'axios';
 import HomeIcon from '@material-ui/icons/Home';
 import {Link} from 'react-router-dom';
 import {AppBar, Toolbar, Button} from '@material-ui/core';
 
 export default class Menu extends Component{
 
-    state = {}
-    componentDidMount = () => {
-      axios.get('profile')
-      .then(res => {
-        this.setState({
-          user: res.data.user.name
-        });
-      },
-      err => {
-        console.log(err)
-      }
-  )
-    }
-
+    handleLogout = () =>{
+        localStorage.clear();
+        this.props.setUser(null);
+    };
 
     render(){
         let buttons;
-        if(this.state.user){
+        if(this.props.user){
             buttons = (
                 <Fragment>
-                <Link to={'logout'}>
+                <Link to={'/'} onClick={this.handleLogout}>
                     <Button color="inherit">Logout</Button>
                 </Link>
                 </Fragment>

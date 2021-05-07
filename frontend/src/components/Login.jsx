@@ -32,10 +32,7 @@ const styles = theme => ({
   });
 class Login extends Component {
 
-    state = {
-        loggedIn: "",
-        status: "",
-      };
+    state = {};
 
     handleSubmit = e => {
         e.preventDefault();
@@ -47,11 +44,14 @@ class Login extends Component {
         axios.post('login', data)
         .then(res => {
             localStorage.setItem('token', res.data.token)
+            //console.log(res.data.user);
             this.setState({
                 loggedIn: true
               });
+            this.props.setUser("!");
         })
         .catch(err => {
+            console.log(err);
             if(err.response.status === 422){
                 var e = document.getElementById('mainForm');
                 e.style.transform="translate(6px)";
@@ -61,20 +61,12 @@ class Login extends Component {
             }else{
                 alert(JSON.stringify(err.response.status+" "+err.response.data.message));
             }
-            this.setState({
-                status: "error"
-              });
         })
     }
 
     render(){
         if(this.state.loggedIn){
-            return <Redirect
-            to={{
-            pathname: "/",
-            state: { loggedIn: this.state.loggedIn }
-          }}
-        />
+            return <Redirect to={'/'}/>;
         }
         const {classes} = this.props;
         return (

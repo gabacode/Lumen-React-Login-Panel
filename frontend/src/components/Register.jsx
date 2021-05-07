@@ -33,10 +33,7 @@ const styles = theme => ({
 
 class Register extends Component {
 
-    state = {
-        isRegistered: '',
-        status: '',
-      };
+    state = {};
 
       handleSubmit = e => {
         e.preventDefault();

@@ -19,22 +19,20 @@ const styles = theme => ({
   });
 
 class Home extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-           ...props
-        }
-    }
+    handleLogout = () =>{
+        localStorage.clear();
+        this.props.setUser(null);
+    };
     render(){
         const {classes} = this.props;
         let msg;
-        if(this.state.loggedIn){       
+        if(this.props.user){       
             msg = (
                 <Fragment>
                     <img className="response" src="./approved.jpg" alt="Approvato" />
-                    <h1>Ciao {this.state.user} 🎉</h1>
+                    <h1>Ciao {this.props.user} 🎉</h1>
                     <Grid item>
-                        <Link to={"logout"}>
+                        <Link to={'/'} onClick={this.handleLogout}>
                             <Button className={classes.button} fullWidth variant="contained" color="primary">
                                 Log Out
                             </Button>

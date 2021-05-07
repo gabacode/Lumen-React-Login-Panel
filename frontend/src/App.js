@@ -4,7 +4,6 @@ import axios from 'axios';
 import Home from './Home';
 import Menu from './components/Menu';
 import Login from './components/Login';
-import Logout from './components/Logout';
 import Register from './components/Register';
 
 
@@ -13,30 +12,31 @@ export default class App extends Component {
   componentDidMount = () => {
     axios.get('profile')
     .then(res => {
-      this.setState({
-        user: res.data.user.name
-      });
+      this.setUser(res.data.user.name);
     },
     err => {
-      //pass
+      console.log(err);
     }
 )
-  if (localStorage.getItem("token")) {
-    this.setState({
-      loggedIn : true
-    })
-  }
-
-  }
+  // if (localStorage.getItem("token")) {
+  //   this.setState({
+  //     loggedIn : true
+  //   })
+  // }
+}
+setUser = user =>{
+  this.setState({
+    user: user,
+  })
+} 
   render(){
     return (
       <BrowserRouter>
       <div className="App">
-        <Menu user={this.state.user}/>
+        <Menu user={this.state.user} setUser={this.setUser}/>
         <Switch>
-          <Route exact path="/" component={() => <Home loggedIn={this.state.loggedIn} user={this.state.user}/>}/>
-          <Route path="/login" render={(props) => <Login {...props}/>}/>
-          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/" component={() => <Home user={this.state.user} setUser={this.setUser}/>}/>
+          <Route exact path="/login" component={() => <Login user={this.state.user} setUser={this.setUser}/>}/>
           <Route exact path="/registrazione" component={Register} />
         </Switch>
       </div>
