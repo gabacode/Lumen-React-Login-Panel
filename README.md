@@ -11,6 +11,9 @@ Installare le dependencies
 <br>
 `cd backend/ && composer install`
 
+Rinominare `.env.example` in `.env`
+<br>
+
 Effettuare la migrazione
 <br>
 `php artisan migrate`
