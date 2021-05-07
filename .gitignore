@@ -1,3 +1,4 @@
-db
 backend/vendor
+backend/composer.lock
 frontend/node_modules/ 
+frontend/package-lock.json
