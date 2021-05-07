@@ -10,19 +10,16 @@ import Register from './components/Register';
 export default class App extends Component {
   state = {}
   componentDidMount = () => {
-    axios.get('profile')
-    .then(res => {
-      this.setUser(res.data.user.name);
-    },
-    err => {
-      console.log(err);
-    }
-)
-  // if (localStorage.getItem("token")) {
-  //   this.setState({
-  //     loggedIn : true
-  //   })
-  // }
+    if (localStorage.getItem("token")) {
+      axios.get('profile')
+      .then(res => {
+        this.setUser(res.data.user.name);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }
 setUser = user =>{
   this.setState({
