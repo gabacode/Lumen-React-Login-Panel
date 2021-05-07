@@ -4,7 +4,7 @@ Un semplice pannello di Registrazione e Log In sviluppato in Lumen/React.
 ## Istruzioni
 
 Avviare il pacchetto docker e fare il build.
-`docker-compose up --build`
+`docker-compose build`
 
 ## Backend
 Installare le dependencies
