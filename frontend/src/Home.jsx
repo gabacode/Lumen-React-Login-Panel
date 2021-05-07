@@ -44,7 +44,7 @@ class Home extends Component{
             msg = (
                 <Fragment>
                     <img className="response" src="./welcome.svg" alt="Welcome" />
-                    <h1>Benvenut* 👋</h1>
+                    <h1>Benvenutə 👋</h1>
                     <Grid item>
                         <Link to={"login"}>
                             <Button className={classes.button} fullWidth variant="contained" color="primary">
